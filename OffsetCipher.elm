@@ -1,11 +1,10 @@
 module OffsetCipher exposing (..)
 
+import Char
 import Html exposing (..)
-import Html.App as Html
 import Html.Attributes exposing (..)
 import Html.Events exposing (onInput)
-import Char
-import String exposing (slice, length, indexes, uncons, fromChar, map)
+import String exposing (fromChar, indexes, length, map, slice, uncons)
 
 
 -- MODEL
@@ -62,12 +61,12 @@ alphabet =
 
 rotateString : Int -> String -> String
 rotateString n message =
-    map
+    String.map
         (\ch ->
             if Char.isUpper ch then
                 Char.toUpper (rotate n (Char.toLower ch))
             else
-                (rotate n) ch
+                rotate n ch
         )
         message
 
@@ -78,12 +77,12 @@ rotate n ch =
         start =
             valueOf ch
     in
-        case start of
-            -1 ->
-                ch
+    case start of
+        (-1) ->
+            ch
 
-            p ->
-                charValue ((p + n) % length alphabet)
+        p ->
+            charValue ((p + n) % length alphabet)
 
 
 charValue : Int -> Char
@@ -116,7 +115,7 @@ view model =
         [ div [] [ textarea [ cols 40, rows 13, value model.message, onInput UpdateString, autofocus True ] [] ]
         , div [] [ textarea [ cols 40, rows 13, value (rotateString model.rotation model.message) ] [] ]
         , div []
-            [ input [ type' "number", onInput UpdateNum, value (toString model.rotation) ]
+            [ input [ type_ "number", onInput UpdateNum, value (toString model.rotation) ]
                 []
             ]
         ]
