@@ -1,7 +1,7 @@
 {
     "version": "1.0.0",
     "summary": "Rot13 (and others) text converter.",
-    "repository": "https://github.com/chigby/offset-cipher",
+    "repository": "https://github.com/chigby/offset-cipher.git",
     "license": "BSD3",
     "source-directories": [
         "."
